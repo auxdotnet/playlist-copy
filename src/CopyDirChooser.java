@@ -25,7 +25,7 @@ public class CopyDirChooser extends JPanel
         int result;
 
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("."));
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         chooser.setDialogTitle(choosertitle);
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 

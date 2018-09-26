@@ -11,9 +11,12 @@ public class Main {
         JPanel all = new JPanel(new GridLayout(0, 1));
         all.setPreferredSize(new Dimension(650, 300));
 
-        PlaylistOpener file = new PlaylistOpener();
+        PlaylistFileOpener file = new PlaylistFileOpener();
         CopyDirChooser copyDir = new CopyDirChooser();
-        CopyButton button = new CopyButton(copyDir, file);
+        JLabel infoLabel = new JLabel();
+        infoLabel.setText("Welcome to the Playlist-Copy Program.");
+        infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        CopyButton button = new CopyButton(copyDir, file, infoLabel);
 
         frame.addWindowListener(
                 new WindowAdapter() {
@@ -29,6 +32,7 @@ public class Main {
         all.add(copyDir);
         all.add(new JLabel("3. Press Copy"));
         all.add(button);
+        all.add(infoLabel);
 
         frame.getContentPane().add(all);
         frame.pack();

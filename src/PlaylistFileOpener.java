@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class PlaylistOpener extends JPanel implements ActionListener {
+public class PlaylistFileOpener extends JPanel implements ActionListener {
     private JFileChooser chooser;
     private JTextArea text;
     private File file;
@@ -17,7 +17,7 @@ public class PlaylistOpener extends JPanel implements ActionListener {
     private ArrayList<File> list;
     private String path;
 
-    PlaylistOpener() {
+    PlaylistFileOpener() {
         JButton button = new JButton("Select Playlist File");
         text = new JTextArea("No File Selected");
         button.addActionListener(this);
@@ -75,7 +75,13 @@ public class PlaylistOpener extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        if (path == null) {
+            chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        }
+        else {
+            chooser.setCurrentDirectory(new File(path));
+        }
+
         int result = chooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             file = chooser.getSelectedFile();
