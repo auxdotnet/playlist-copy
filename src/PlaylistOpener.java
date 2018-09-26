@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 public class PlaylistOpener extends JPanel implements ActionListener {
     private JFileChooser chooser;
-    private JButton button;
     private JTextArea text;
     private File file;
     private int amount;
     private ArrayList<File> list;
     private String path;
 
-    public PlaylistOpener() {
-        button = new JButton("Select Playlist File");
+    PlaylistOpener() {
+        JButton button = new JButton("Select Playlist File");
         text = new JTextArea("No File Selected");
         button.addActionListener(this);
         setLayout(new GridLayout(1, 0));
@@ -28,12 +27,12 @@ public class PlaylistOpener extends JPanel implements ActionListener {
         chooser = new JFileChooser();
     }
 
-    public ArrayList<File> getList() {
+    ArrayList<File> getList() {
         return list;
     }
 
-    private void readPaths() {
-        list = new ArrayList<File>();
+    private void readPaths(String drive) {
+        list = new ArrayList<>();
 
         if (file != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -45,7 +44,7 @@ public class PlaylistOpener extends JPanel implements ActionListener {
                         if (f.exists()) {
                             list.add(f);
                         } else {
-                            f = new File(path, text);
+                            f = new File(drive, text);
                             if (f.exists()) {
                                 list.add(f);
                             }
@@ -60,7 +59,9 @@ public class PlaylistOpener extends JPanel implements ActionListener {
         }
 
         amount = list.size();
-        text.setText(file.getAbsolutePath() + "\n" + amount + " Tracks identified");
+        if (file != null) {
+            text.setText(file.getAbsolutePath() + "\n" + amount + " Tracks identified");
+        }
 
     }
 
@@ -80,7 +81,9 @@ public class PlaylistOpener extends JPanel implements ActionListener {
             file = chooser.getSelectedFile();
             path = chooser.getCurrentDirectory().getAbsolutePath();
         }
-        readPaths();
+
+        String drive = path.substring(0,2);
+        readPaths(drive);
         printPaths();
 
     }
