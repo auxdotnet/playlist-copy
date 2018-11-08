@@ -6,7 +6,7 @@ import java.awt.event.WindowEvent;
 
 public class Main {
 
-    public static void main(String s[]) {
+    private static void createFrame() {
         JFrame frame = new JFrame("");
         JPanel all = new JPanel(new GridLayout(0, 1));
         all.setPreferredSize(new Dimension(650, 300));
@@ -40,5 +40,9 @@ public class Main {
         frame.setTitle("PlaylistCopy");
 
         frame.setVisible(true);
+    }
+
+    public static void main(String s[]) {
+        createFrame();
     }
 }

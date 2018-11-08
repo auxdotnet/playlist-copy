@@ -88,9 +88,13 @@ public class PlaylistFileOpener extends JPanel implements ActionListener {
             path = chooser.getCurrentDirectory().getAbsolutePath();
         }
 
-        String drive = path.substring(0,2);
-        readPaths(drive);
-        printPaths();
-
+        if (path != null) {
+            String drive = path.substring(0,2);
+            readPaths(drive);
+            printPaths();
+        }
+        else {
+            System.out.println("Path is Null!");
+        }
     }
 }
