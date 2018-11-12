@@ -3,9 +3,8 @@ package gui;
 import data.PlaylistCopyController;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 
-public abstract class AbstractGui implements ActionListener {
+public abstract class AbstractGui {
 
     PlaylistCopyController controller;
 
