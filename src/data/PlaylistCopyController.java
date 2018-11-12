@@ -38,15 +38,15 @@ public class PlaylistCopyController {
             int amount = 0;
 
             System.out.println("Start Copying!");
-            currGui.getCopyText().setText("Start Copying!");
-            currGui.getInfoLabel().setText("Copying started ..");
-            currGui.getInfoLabel().revalidate();
-            currGui.getInfoLabel().repaint();
+            currGui.setCopyText("Start Copying!");
+            currGui.setInfoLabel("Copying started ..");
+            //currGui.getInfoLabel().revalidate();
+            //currGui.getInfoLabel().repaint();
 
             for (File file : fileList) {
                 try {
                     System.out.println(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
-                    currGui.getInfoLabel().setText(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
+                    currGui.setInfoLabel(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
                     Files.copy(file.toPath(),
                             (new File(path + "\\" + file.getName())).toPath(),
                             StandardCopyOption.REPLACE_EXISTING);
@@ -56,8 +56,8 @@ public class PlaylistCopyController {
                 }
             }
             System.out.println(amount + " Tracks copied!");
-            currGui.getInfoLabel().setText("Copy complete!");
-            currGui.getCopyText().setText(amount + " Tracks copied!");
+            currGui.setInfoLabel("Copy complete!");
+            currGui.setCopyText(amount + " Tracks copied!");
 
 
             System.out.println("Finished Copying!");
@@ -73,13 +73,13 @@ public class PlaylistCopyController {
         // disable the "All files" option.
         chooser.setAcceptAllFileFilterUsed(false);
         //
-        if (chooser.showOpenDialog(currGui) == JFileChooser.APPROVE_OPTION) {
+        if (chooser.showOpenDialog(currGui.getComponent()) == JFileChooser.APPROVE_OPTION) {
             System.out.println("getCurrentDirectory(): "
                     + chooser.getCurrentDirectory());
             System.out.println("getSelectedFile() : "
                     + chooser.getSelectedFile());
             dirTarget = chooser.getSelectedFile();
-            currGui.getDirChooserText().setText(chooser.getSelectedFile().getAbsolutePath());
+            currGui.setTargetDirText(chooser.getSelectedFile().getAbsolutePath());
         } else {
             System.out.println("No Selection ");
         }
@@ -95,7 +95,7 @@ public class PlaylistCopyController {
             playlistChooser.setCurrentDirectory(new File(path));
         }
 
-        int result = playlistChooser.showOpenDialog(currGui);
+        int result = playlistChooser.showOpenDialog(currGui.getComponent());
         if (result == JFileChooser.APPROVE_OPTION) {
             currPlaylistFile = playlistChooser.getSelectedFile();
             path = playlistChooser.getCurrentDirectory().getAbsolutePath();
@@ -135,12 +135,12 @@ public class PlaylistCopyController {
                 }
             } catch (IOException exp) {
                 exp.printStackTrace();
-                JOptionPane.showMessageDialog(currGui, "Failed to read file", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(currGui.getComponent(), "Failed to read file", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
         if (currPlaylistFile != null) {
-            currGui.getPlaylistOpenerText().setText(currPlaylistFile.getAbsolutePath() + "\n" + fileList.size() + " Tracks identified");
+            currGui.setPlaylistOpenerText(currPlaylistFile.getAbsolutePath() + "\n" + fileList.size() + " Tracks identified");
         }
 
     }

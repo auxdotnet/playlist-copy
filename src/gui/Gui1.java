@@ -9,8 +9,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Gui1 extends AbstractGui {
+    private JButton copyButton, dirChooserButton, playlistOpenerButton;
+    private JTextArea copyText, dirChooserText, playlistOpenerText;
+    private JLabel infoLabel;
+    private JFrame topFrame;
 
     public Gui1() {
+        topFrame = new JFrame();
         JPanel all = new JPanel(new GridLayout(0, 1));
         all.setPreferredSize(new Dimension(650, 300));
 
@@ -18,7 +23,7 @@ public class Gui1 extends AbstractGui {
         infoLabel.setText("Welcome to the Playlist-Copy Program.");
         infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        this.addWindowListener(
+        topFrame.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         System.exit(0);
@@ -62,12 +67,12 @@ public class Gui1 extends AbstractGui {
         all.add(copyButtonPanel);
         all.add(infoLabel);
 
-        this.getContentPane().add(all);
-        this.pack();
+        topFrame.getContentPane().add(all);
+        topFrame.pack();
 
-        this.setTitle("PlaylistCopy");
+        topFrame.setTitle("PlaylistCopy");
 
-        this.setVisible(true);
+        topFrame.setVisible(true);
 
         // init other components
         controller = PlaylistCopyController.getInstance(this);
@@ -86,4 +91,28 @@ public class Gui1 extends AbstractGui {
         }
     }
 
+    @Override
+    public void setInfoLabel(String text) {
+        infoLabel.setText(text);
+    }
+
+    @Override
+    public void setCopyText(String text) {
+        copyText.setText(text);
+    }
+
+    @Override
+    public void setTargetDirText(String text) {
+        dirChooserText.setText(text);
+    }
+
+    @Override
+    public void setPlaylistOpenerText(String text) {
+        playlistOpenerText.setText(text);
+    }
+
+    @Override
+    public Component getComponent() {
+        return topFrame;
+    }
 }
