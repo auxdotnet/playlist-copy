@@ -1,8 +1,8 @@
-import gui.Gui1;
+import gui.GuiSwing;
 
 public class Application {
 
     public static void main(String s[]) {
-        new Gui1();
+        new GuiSwing();
     }
 }

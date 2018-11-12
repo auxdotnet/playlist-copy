@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Gui1 extends AbstractGui {
+public class GuiSwing extends AbstractGui {
     private JButton copyButton, dirChooserButton, playlistOpenerButton;
     private JTextArea copyText, dirChooserText, playlistOpenerText;
     private JLabel infoLabel;
     private JFrame topFrame;
 
-    public Gui1() {
+    public GuiSwing() {
         topFrame = new JFrame();
         JPanel all = new JPanel(new GridLayout(0, 1));
         all.setPreferredSize(new Dimension(650, 300));
