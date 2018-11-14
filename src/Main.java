@@ -1,5 +1,4 @@
-import gui.GuiFx;
-import gui.GuiSwing;
+import gui.*;
 
 public class Main {
 
