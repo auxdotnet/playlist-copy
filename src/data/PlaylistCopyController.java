@@ -1,6 +1,6 @@
 package data;
 
-import gui.AbstractGui;
+import gui.GuiInterface;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -17,10 +17,10 @@ public class PlaylistCopyController {
     private File dirTarget, currPlaylistFile;
     private ArrayList<File> fileList;
     private String path;
-    private static AbstractGui currGui;
+    private static GuiInterface currGui;
 
     // Singleton getInstance
-    public static PlaylistCopyController getInstance(AbstractGui gui) {
+    public static PlaylistCopyController getInstance(GuiInterface gui) {
         currGui = gui;
         if (instance == null) {
             instance = new PlaylistCopyController();

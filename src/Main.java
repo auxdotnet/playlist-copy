@@ -5,6 +5,6 @@ public class Main {
 
     public static void main(String s[]) {
         //new GuiSwing();
-        new GuiFx();
+        GuiFx.launch(GuiFx.class);
     }
 }

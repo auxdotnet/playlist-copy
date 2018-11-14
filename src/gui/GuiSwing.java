@@ -9,14 +9,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class GuiSwing extends AbstractGui implements ActionListener {
+public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
     private JButton copyButton, dirChooserButton, playlistOpenerButton;
     private JTextArea copyText, dirChooserText, playlistOpenerText;
     private JLabel infoLabel;
-    private JFrame topFrame;
+
+    private PlaylistCopyController controller;
 
     public GuiSwing() {
-        topFrame = new JFrame();
         JPanel all = new JPanel(new GridLayout(0, 1));
         all.setPreferredSize(new Dimension(650, 300));
 
@@ -24,7 +24,7 @@ public class GuiSwing extends AbstractGui implements ActionListener {
         infoLabel.setText("Welcome to the Playlist-Copy Program.");
         infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        topFrame.addWindowListener(
+        this.addWindowListener(
                 new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         System.exit(0);
@@ -68,12 +68,12 @@ public class GuiSwing extends AbstractGui implements ActionListener {
         all.add(copyButtonPanel);
         all.add(infoLabel);
 
-        topFrame.getContentPane().add(all);
-        topFrame.pack();
+        this.getContentPane().add(all);
+        this.pack();
 
-        topFrame.setTitle("PlaylistCopy");
+        this.setTitle("PlaylistCopy");
 
-        topFrame.setVisible(true);
+        this.setVisible(true);
 
         // init other components
         controller = PlaylistCopyController.getInstance(this);
@@ -114,6 +114,6 @@ public class GuiSwing extends AbstractGui implements ActionListener {
 
     @Override
     public Component getComponent() {
-        return topFrame;
+        return this;
     }
 }
