@@ -11,9 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.awt.Component;
+import java.io.File;
+import java.sql.SQLOutput;
 
 public class GuiFx extends Application implements GuiInterface, EventHandler<ActionEvent> {
     private Button copyButton, dirChooserButton, playlistOpenerButton;
@@ -44,7 +49,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         playlistOpenerButton.setOnAction(this);
         playlistOpenerText = new Label("No File Selected");
         playlistBox.getChildren().addAll(playlistOpenerButton, playlistOpenerText);
-        grid.add(playlistBox, 0,1);
+        grid.add(playlistBox, 0, 1);
 
         // Add Copy Dir Chooser Elements
         grid.add(new Label("2. Select Target Directory"), 0, 2);
@@ -53,7 +58,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         dirChooserButton.setOnAction(this);
         dirChooserText = new Label("No Directory Selected");
         targetBox.getChildren().addAll(dirChooserButton, dirChooserText);
-        grid.add(targetBox, 0,3);
+        grid.add(targetBox, 0, 3);
 
         // Add Start Copy Elements
         grid.add(new Label("3. Start Copying"), 0, 4);
@@ -62,7 +67,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         copyButton.setOnAction(this);
         copyText = new Label("");
         copyBox.getChildren().addAll(copyButton, copyText);
-        grid.add(copyBox, 0,5);
+        grid.add(copyBox, 0, 5);
 
         // Add grid pane to top pane
         topPane.setCenter(grid);
@@ -104,14 +109,56 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
     }
 
     @Override
+    public File chooseTargetDir() {
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        chooser.setTitle("Choose a destination folder");
+
+        // get selected File
+        File dirTarget = chooser.showDialog(null);
+
+        if (dirTarget != null) {
+            System.out.println("getSelectedFile() : "
+                    + dirTarget.getAbsolutePath());
+            setTargetDirText(dirTarget.getAbsolutePath());
+        } else {
+            System.out.println("No directory selected!");
+        }
+
+        return dirTarget;
+    }
+
+    @Override
+    public File choosePlaylistFile(String currPath) {
+        FileChooser chooser = new FileChooser();
+        if (currPath != null) {
+            chooser.setInitialDirectory(new File(currPath));
+        } else {
+            chooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        }
+        chooser.setTitle("Choose a destination folder");
+
+        // get selected File
+        File file = chooser.showOpenDialog(null);
+
+        if (file != null) {
+            System.out.println("getSelectedFile() : "
+                    + file.getAbsolutePath());
+            setTargetDirText(file.getAbsolutePath());
+        } else {
+            System.out.println("No file selected!");
+        }
+
+        return file;
+    }
+
+    @Override
     public void handle(ActionEvent e) {
-        if(e.getSource() == copyButton) {
+        if (e.getSource() == copyButton) {
             controller.startCopying();
-        }
-        else if (e.getSource() == dirChooserButton) {
+        } else if (e.getSource() == dirChooserButton) {
             controller.chooseTargetDir();
-        }
-        else if (e.getSource() == playlistOpenerButton) {
+        } else if (e.getSource() == playlistOpenerButton) {
             controller.choosePlaylistFile();
         }
     }

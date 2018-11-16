@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
     private JButton copyButton, dirChooserButton, playlistOpenerButton;
@@ -81,13 +82,11 @@ public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == copyButton) {
+        if (e.getSource() == copyButton) {
             controller.startCopying();
-        }
-        else if (e.getSource() == dirChooserButton) {
+        } else if (e.getSource() == dirChooserButton) {
             controller.chooseTargetDir();
-        }
-        else if (e.getSource() == playlistOpenerButton) {
+        } else if (e.getSource() == playlistOpenerButton) {
             controller.choosePlaylistFile();
         }
     }
@@ -115,5 +114,47 @@ public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
     @Override
     public Component getComponent() {
         return this;
+    }
+
+    @Override
+    public File chooseTargetDir() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        chooser.setDialogTitle("Choose a destination folder");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        File dirTarget = null;
+
+        // disable the "All files" option.
+        chooser.setAcceptAllFileFilterUsed(false);
+        //
+        if (chooser.showOpenDialog(getComponent()) == JFileChooser.APPROVE_OPTION) {
+            System.out.println("getCurrentDirectory(): "
+                    + chooser.getCurrentDirectory());
+            System.out.println("getSelectedFile() : "
+                    + chooser.getSelectedFile());
+            dirTarget = chooser.getSelectedFile();
+            setTargetDirText(chooser.getSelectedFile().getAbsolutePath());
+        }
+
+        return dirTarget;
+    }
+
+    @Override
+    public File choosePlaylistFile(String currPath) {
+        JFileChooser playlistChooser = new JFileChooser();
+        File currPlaylistFile = null;
+
+        if (currPath == null) {
+            playlistChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        }else{
+            playlistChooser.setCurrentDirectory(new File(currPath));
+        }
+
+        int result = playlistChooser.showOpenDialog(getComponent());
+        if (result == JFileChooser.APPROVE_OPTION) {
+            currPlaylistFile = playlistChooser.getSelectedFile();
+        }
+
+        return currPlaylistFile;
     }
 }

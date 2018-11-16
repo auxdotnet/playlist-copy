@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.io.File;
 
 public interface GuiInterface {
 
@@ -10,4 +11,7 @@ public interface GuiInterface {
     void setPlaylistOpenerText(String text);
 
     Component getComponent();
+
+    File chooseTargetDir();
+    File choosePlaylistFile(String currPath);
 }

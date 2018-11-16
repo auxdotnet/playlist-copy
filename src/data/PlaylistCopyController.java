@@ -65,50 +65,24 @@ public class PlaylistCopyController {
     }
 
     public void chooseTargetDir() {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        chooser.setDialogTitle("Choose a destination folder");
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        // disable the "All files" option.
-        chooser.setAcceptAllFileFilterUsed(false);
-        //
-        if (chooser.showOpenDialog(currGui.getComponent()) == JFileChooser.APPROVE_OPTION) {
-            System.out.println("getCurrentDirectory(): "
-                    + chooser.getCurrentDirectory());
-            System.out.println("getSelectedFile() : "
-                    + chooser.getSelectedFile());
-            dirTarget = chooser.getSelectedFile();
-            currGui.setTargetDirText(chooser.getSelectedFile().getAbsolutePath());
-        } else {
-            System.out.println("No Selection ");
+        dirTarget = currGui.chooseTargetDir();
+        if (dirTarget == null) {
+            System.err.println("Target Dir not found.");
         }
     }
 
     public void choosePlaylistFile() {
-        JFileChooser playlistChooser = new JFileChooser();
+        currPlaylistFile = currGui.choosePlaylistFile(path);
 
-        if (path == null) {
-            playlistChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        }
-        else {
-            playlistChooser.setCurrentDirectory(new File(path));
-        }
-
-        int result = playlistChooser.showOpenDialog(currGui.getComponent());
-        if (result == JFileChooser.APPROVE_OPTION) {
-            currPlaylistFile = playlistChooser.getSelectedFile();
-            path = playlistChooser.getCurrentDirectory().getAbsolutePath();
-        }
-
-        if (path != null) {
-            String drive = path.substring(0,2);
+        if (currPlaylistFile != null) {
+            path = currPlaylistFile.getAbsolutePath();
+            String drive = path.substring(0, 2);
             readPaths(drive);
             printPaths(fileList);
+        } else {
+            System.err.println("Path is Null!");
         }
-        else {
-            System.out.println("Path is Null!");
-        }
+
     }
 
 
