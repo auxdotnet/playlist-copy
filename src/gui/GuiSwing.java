@@ -146,7 +146,7 @@ public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
 
         if (currPath == null) {
             playlistChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        }else{
+        } else {
             playlistChooser.setCurrentDirectory(new File(currPath));
         }
 

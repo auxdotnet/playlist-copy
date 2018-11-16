@@ -10,15 +10,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
-import java.sql.SQLOutput;
 
 public class GuiFx extends Application implements GuiInterface, EventHandler<ActionEvent> {
     private Button copyButton, dirChooserButton, playlistOpenerButton;
@@ -32,7 +32,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         controller = PlaylistCopyController.getInstance(this);
 
         primaryStage.setTitle("Playlist-Copy");
@@ -114,7 +114,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         chooser.setInitialDirectory(new File(System.getProperty("user.home")));
         chooser.setTitle("Choose a destination folder");
 
-        // get selected File
+        // get selected Directory
         File dirTarget = chooser.showDialog(null);
 
         if (dirTarget != null) {
