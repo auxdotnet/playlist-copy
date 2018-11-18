@@ -6,13 +6,17 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -74,8 +78,16 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
 
         // Add Info Label
         infoLabel = new Label("Welcome to Playlist-Copy.");
-        infoLabel.setAlignment(Pos.BOTTOM_CENTER);
+        infoLabel.setAlignment(Pos.CENTER);
         topPane.setBottom(infoLabel);
+
+        // Add Title
+        Font topFont = Font.font("Verdana", FontWeight.BOLD, 20);
+
+        Label topLabel = new Label("Playlist Copy Application");
+        topLabel.setFont(topFont);
+        topLabel.setPadding(new Insets(15));
+        topPane.setTop(topLabel);
 
         // Put everything together in a scene
         Scene scene = new Scene(topPane, 600, 400);
