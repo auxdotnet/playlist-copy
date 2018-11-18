@@ -34,33 +34,42 @@ public class PlaylistCopyController {
 
     public void startCopying() {
         new Thread(() -> {
-            String path = dirTarget.getAbsolutePath() + "\\";
-            int amount = 0;
-
-            System.out.println("Start Copying!");
-            currGui.setCopyText("Start Copying!");
-            currGui.setInfoLabel("Copying started ..");
-            //currGui.getInfoLabel().revalidate();
-            //currGui.getInfoLabel().repaint();
-
-            for (File file : fileList) {
-                try {
-                    System.out.println(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
-                    currGui.setInfoLabel(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
-                    Files.copy(file.toPath(),
-                            (new File(path + "\\" + file.getName())).toPath(),
-                            StandardCopyOption.REPLACE_EXISTING);
-                    amount++;
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            if (dirTarget == null) {
+                currGui.setInfoLabel("Error: Target Dir not selected!");
             }
-            System.out.println(amount + " Tracks copied!");
-            currGui.setInfoLabel("Copy complete!");
-            currGui.setCopyText(amount + " Tracks copied!");
+            else if (fileList == null) {
+                currGui.setInfoLabel("Error: No Playlist file selected!");
+            }
+            else if (fileList.size() == 0) {
+                currGui.setInfoLabel("Error: File List is empty!");
+            }
+            else {
+                String path = dirTarget.getAbsolutePath() + "\\";
+                int amount = 0;
+
+                System.out.println("Start Copying!");
+                currGui.setCopyText("Start Copying!");
+                currGui.setInfoLabel("Copying started ..");
+
+                for (File file : fileList) {
+                    try {
+                        System.out.println(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
+                        currGui.setInfoLabel(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
+                        Files.copy(file.toPath(),
+                                (new File(path + "\\" + file.getName())).toPath(),
+                                StandardCopyOption.REPLACE_EXISTING);
+                        amount++;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                System.out.println(amount + " Tracks copied!");
+                currGui.setInfoLabel("Copy complete!");
+                currGui.setCopyText(amount + " Tracks copied!");
 
 
-            System.out.println("Finished Copying!");
+                System.out.println("Finished Copying!");
+            }
         }).start();
     }
 
@@ -68,6 +77,7 @@ public class PlaylistCopyController {
         dirTarget = currGui.chooseTargetDir();
         if (dirTarget == null) {
             System.err.println("Target Dir not found.");
+            currGui.setTargetDirText("No Directory Selected");
         }
     }
 
@@ -81,10 +91,9 @@ public class PlaylistCopyController {
             printPaths(fileList);
         } else {
             System.err.println("Path is Null!");
+            currGui.setPlaylistOpenerText("No File Selected");
         }
-
     }
-
 
     private void readPaths(String drive) {
         fileList = new ArrayList<>();
@@ -104,7 +113,6 @@ public class PlaylistCopyController {
                                 fileList.add(f);
                             }
                         }
-                        //check file
                     }
                 }
             } catch (IOException exp) {
@@ -116,7 +124,6 @@ public class PlaylistCopyController {
         if (currPlaylistFile != null) {
             currGui.setPlaylistOpenerText(currPlaylistFile.getAbsolutePath() + "\n" + fileList.size() + " Tracks identified");
         }
-
     }
 
     private void printPaths(ArrayList<File> list) {

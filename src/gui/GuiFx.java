@@ -39,8 +39,8 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         BorderPane topPane = new BorderPane();
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10));
-        grid.setHgap(8);
-        grid.setVgap(5);
+        grid.setHgap(20);
+        grid.setVgap(15);
 
         // Add Playlist File Opener Elements
         grid.add(new Label("1. Select Playlist File"), 0, 0);
@@ -136,7 +136,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         } else {
             chooser.setInitialDirectory(new File(System.getProperty("user.home")));
         }
-        chooser.setTitle("Choose a destination folder");
+        chooser.setTitle("Choose a Playlist file");
 
         // get selected File
         File file = chooser.showOpenDialog(null);
