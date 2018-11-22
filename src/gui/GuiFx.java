@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -51,6 +52,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         grid.setPadding(new Insets(10));
         grid.setHgap(20);
         grid.setVgap(15);
+        grid.setAlignment(Pos.CENTER);
 
         // Add Playlist File Opener Elements
         grid.add(new Label("1. Select Playlist File"), 0, 0);
@@ -86,11 +88,12 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
 
         // Add grid pane to top pane
         topPane.setCenter(grid);
+        BorderPane.setAlignment(grid, Pos.CENTER);
 
         // Add Info Label
         infoLabel = new Label("Welcome to Playlist-Copy.");
-        infoLabel.setAlignment(Pos.CENTER);
         topPane.setBottom(infoLabel);
+        BorderPane.setAlignment(infoLabel, Pos.CENTER);
 
         // Add Title
         Font topFont = Font.font("Verdana", FontWeight.BOLD, 20);
@@ -101,7 +104,7 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         topPane.setTop(topLabel);
 
         // Put everything together in a scene
-        Scene scene = new Scene(topPane, 600, 400);
+        Scene scene = new Scene(topPane, 500, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7dbf228-87a0-4485-8215-8bd2fae69a51" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/data/FileItemFx.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/TrackFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/playlist-copy/data/PlaylistCopyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/playlist-copy/data/PlaylistCopyController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiFx.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiFx.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiSwing$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiSwing$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiSwing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/playlist-copy/gui/GuiSwing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/PlaylistCopyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/PlaylistCopyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/GuiFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GuiFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/GuiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GuiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/GuiSwing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GuiSwing.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,13 +44,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="16" />
-          <entry key="java" value="6323" />
+          <entry key="java" value="6370" />
           <entry key="md" value="300" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6323" />
+          <entry key="JAVA" value="6370" />
           <entry key="Markdown" value="300" />
           <entry key="PLAIN_TEXT" value="16" />
         </counts>
@@ -78,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/GuiFx.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="181" column="41" selection-start-line="181" selection-start-column="41" selection-end-line="181" selection-end-column="41" />
+            <state relative-caret-position="221">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
             </state>
           </provider>
         </entry>
@@ -130,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/PlaylistCopyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="67" column="71" selection-start-line="67" selection-start-column="71" selection-end-line="67" selection-end-column="71" />
+            <state relative-caret-position="240">
+              <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -203,9 +193,9 @@
         <option value="$PROJECT_DIR$/src/gui/GuiInterface.java" />
         <option value="$PROJECT_DIR$/src/gui/GuiSwing.java" />
         <option value="$PROJECT_DIR$/src/data/TrackFile.java" />
-        <option value="$PROJECT_DIR$/src/gui/GuiFx.java" />
         <option value="$PROJECT_DIR$/src/data/FileItemFx.java" />
         <option value="$PROJECT_DIR$/src/data/PlaylistCopyController.java" />
+        <option value="$PROJECT_DIR$/src/gui/GuiFx.java" />
       </list>
     </option>
   </component>
@@ -265,7 +255,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542914139400" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542921578644" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -485,13 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GuiFx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="181" column="41" selection-start-line="181" selection-start-column="41" selection-end-line="181" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/FileItemFx.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -522,11 +505,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data/PlaylistCopyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="67" column="71" selection-start-line="67" selection-start-column="71" selection-end-line="67" selection-end-column="71" />
+        <state relative-caret-position="240">
+          <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GuiFx.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
         </state>
       </provider>
     </entry>
