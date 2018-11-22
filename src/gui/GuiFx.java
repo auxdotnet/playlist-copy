@@ -1,8 +1,11 @@
 package gui;
 
+import data.FileItemFx;
 import data.PlaylistCopyController;
+import data.TrackFile;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +13,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -18,14 +23,17 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class GuiFx extends Application implements GuiInterface, EventHandler<ActionEvent> {
     private Button copyButton, dirChooserButton, playlistOpenerButton;
     private Label copyText, dirChooserText, playlistOpenerText;
     private Label infoLabel;
+    private ListView<FileItemFx> listView;
 
     private PlaylistCopyController controller;
 
@@ -62,14 +70,19 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         targetBox.getChildren().addAll(dirChooserButton, dirChooserText);
         grid.add(targetBox, 0, 3);
 
+        // Add File CheckboxList
+        listView = new ListView<>();
+        grid.add(listView, 0, 4);
+        listView.setVisible(false);
+
         // Add Start Copy Elements
-        grid.add(new Label("3. Start Copying"), 0, 4);
+        grid.add(new Label("3. Start Copying"), 0, 5);
         HBox copyBox = new HBox();
         copyButton = new Button("Start Copy");
         copyButton.setOnAction(this);
         copyText = new Label("");
         copyBox.getChildren().addAll(copyButton, copyText);
-        grid.add(copyBox, 0, 5);
+        grid.add(copyBox, 0, 6);
 
         // Add grid pane to top pane
         topPane.setCenter(grid);
@@ -160,6 +173,25 @@ public class GuiFx extends Application implements GuiInterface, EventHandler<Act
         }
 
         return file;
+    }
+
+    @Override
+    public void showFileCheckboxList(ArrayList<TrackFile> fileList) {
+
+        for (TrackFile file:fileList) {
+            FileItemFx item = new FileItemFx(file, true);
+
+            // observe item's on property and display message if it changes:
+            item.onProperty().addListener((obs, wasOn, isNowOn) -> {
+                //System.out.println(item.getTitle() + " changed on state from "+wasOn+" to "+isNowOn);
+                item.getDataFile().setDoCopy(isNowOn);
+            });
+
+            listView.getItems().add(item);
+        }
+
+        listView.setCellFactory(CheckBoxListCell.forListView(FileItemFx::onProperty));
+        listView.setVisible(true);
     }
 
     @Override

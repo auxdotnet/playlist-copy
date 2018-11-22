@@ -1,7 +1,10 @@
 package gui;
 
+import data.TrackFile;
+
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public interface GuiInterface {
 
@@ -18,4 +21,6 @@ public interface GuiInterface {
     File chooseTargetDir();
 
     File choosePlaylistFile(String currPath);
+
+    void showFileCheckboxList(ArrayList<TrackFile> fileList);
 }

@@ -15,7 +15,7 @@ public class PlaylistCopyController {
     private static PlaylistCopyController instance;
 
     private File dirTarget, currPlaylistFile;
-    private ArrayList<File> fileList;
+    private ArrayList<TrackFile> fileList;
     private String path;
     private static GuiInterface currGui;
 
@@ -51,16 +51,21 @@ public class PlaylistCopyController {
                 currGui.setCopyText("Start Copying!");
                 currGui.setInfoLabel("Copying started ..");
 
-                for (File file : fileList) {
-                    try {
-                        System.out.println(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
-                        currGui.setInfoLabel(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
-                        Files.copy(file.toPath(),
-                                (new File(path + "\\" + file.getName())).toPath(),
-                                StandardCopyOption.REPLACE_EXISTING);
-                        amount++;
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                for (TrackFile file : fileList) {
+                    if (file.isDoCopy()) {
+                        try {
+                            System.out.println(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
+                            currGui.setInfoLabel(amount + "/" + fileList.size() + " - Currently copying: " + file.getName());
+                            Files.copy(file.toPath(),
+                                    (new TrackFile(path + "\\" + file.getName())).toPath(),
+                                    StandardCopyOption.REPLACE_EXISTING);
+                            amount++;
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    else {
+                        System.out.println("Skipped: " + file.getName());
                     }
                 }
                 System.out.println(amount + " Tracks copied!");
@@ -89,6 +94,7 @@ public class PlaylistCopyController {
             String drive = path.substring(0, 2);
             readPaths(drive);
             printPaths(fileList);
+            currGui.showFileCheckboxList(fileList);
         } else {
             System.err.println("Path is Null!");
             currGui.setPlaylistOpenerText("No File Selected");
@@ -104,11 +110,11 @@ public class PlaylistCopyController {
                 br.readLine();
                 while ((text = br.readLine()) != null) {
                     if (!text.startsWith("#")) {
-                        File f = new File(text);
+                        TrackFile f = new TrackFile(text);
                         if (f.exists()) {
                             fileList.add(f);
                         } else {
-                            f = new File(drive, text);
+                            f = new TrackFile(drive, text);
                             if (f.exists()) {
                                 fileList.add(f);
                             }
@@ -126,7 +132,7 @@ public class PlaylistCopyController {
         }
     }
 
-    private void printPaths(ArrayList<File> list) {
+    private void printPaths(ArrayList<TrackFile> list) {
         int amount = list.size();
         for (File f : list) {
             System.out.println(f.getAbsolutePath());

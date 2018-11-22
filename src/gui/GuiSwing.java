@@ -1,6 +1,7 @@
 package gui;
 
 import data.PlaylistCopyController;
+import data.TrackFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
 
 public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
     private JButton copyButton, dirChooserButton, playlistOpenerButton;
@@ -156,5 +158,10 @@ public class GuiSwing extends JFrame implements GuiInterface, ActionListener {
         }
 
         return currPlaylistFile;
+    }
+
+    @Override
+    public void showFileCheckboxList(ArrayList<TrackFile> fileList) {
+        System.out.println("showFileCheckboxList not Implemented!");
     }
 }
